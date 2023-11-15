@@ -38,8 +38,9 @@ public class ServiceController {
         if (service == null) {
             return new ResponseEntity<Object>("service avec ID " + id + " n exite pas", HttpStatus.BAD_REQUEST);
         } else {
+            service.setId(id);
             serviceService.update(service);
-            return ResponseEntity.ok("UPDATE AVEC SUCCEs");
+            return ResponseEntity.ok("Update avec succes");
         }
     }
 

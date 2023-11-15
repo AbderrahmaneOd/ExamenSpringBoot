@@ -35,13 +35,14 @@ public class EmployeController {
     @PutMapping("/{id}")
     public ResponseEntity updateEmploye(@PathVariable Long id, @RequestBody Employe employe) {
 
-        if (employe == null) {
-            return new ResponseEntity<Object>("employe avec ID " + id + " n exite pas", HttpStatus.BAD_REQUEST);
+        if (employeService.findById(id) == null) {
+            return new ResponseEntity<Object>("Employe with ID " + id + " not found", HttpStatus.BAD_REQUEST);
         } else {
-            employeService.update(employe);
-            return ResponseEntity.ok("UPDATE AVEC SUCCEs");
+            employe.setId(id);
+            return ResponseEntity.ok(employeService.update(employe));
         }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable long id) {
